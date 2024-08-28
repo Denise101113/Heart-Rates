@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Rate Zone Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            width: calc(100% - 22px);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #e9f5ff;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <h2>Heart Rate Zone Calculator</h2>
+    <form id="heartRateForm">
+        <label for="age">Enter Your Age:</label><br>
+        <input type="number" id="age" name="age" placeholder="e.g., 40" required min="1" max="120"><br>
+        <button type="button" onclick="calculateHeartRate()">Calculate</button>
+    </form>
+    <div class="result" id="result" style="display: none;">
+        <p><strong>Zone 2 Heart Rate Range:</strong></p>
+        <p id="zone2"></p>
+    </div>
+</div>
+
+<script>
+    function calculateHeartRate() {
+        const age = document.getElementById('age').value;
+        if (age) {
+            const maxHeartRate = 220 - age;
+            const lowerZone2 = Math.round(maxHeartRate * 0.6);
+            const upperZone2 = Math.round(maxHeartRate * 0.7);
+            document.getElementById('zone2').innerText = `${lowerZone2} - ${upperZone2} beats per minute (bpm)`;
+            document.getElementById('result').style.display = 'block';
+        } else {
+            alert('Please enter a valid age.');
+        }
+    }
+</script>
+
+</body>
+</html>
